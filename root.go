@@ -2,6 +2,7 @@ package lxrcli
 
 import (
 	"log"
+	"lxr-cli/commands"
 	"os"
 )
 
@@ -15,7 +16,7 @@ func Execute() {
 	case "run":
 		//do nothing
 	case "ping":
-		//do nothing
+		commands.Ping()
 	default:
 		log.Fatal("Unknown command")
 	}
