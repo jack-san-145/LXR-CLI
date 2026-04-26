@@ -2,7 +2,9 @@ package response
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
+	"lxr-cli/models"
 	"net/http"
 )
 
@@ -16,5 +18,20 @@ func GetResponse(res *http.Response) (string, error) {
 		return "", err
 	}
 	return fmt.Sprintf("Response from LXR daemon: %v", content), nil
+
+}
+
+func GetJsonResponse(res *http.Response) (*models.CreationResponse, error) {
+
+	defer res.Body.Close()
+
+	var response models.CreationResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
 
 }
