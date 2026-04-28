@@ -1,7 +1,5 @@
 package models
 
-import ()
-
 type NewContainer struct {
 	Image         string `json:"image_name"`
 	ContainerName string `json:"container_name"`
