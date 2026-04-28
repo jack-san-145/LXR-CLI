@@ -11,15 +11,15 @@ import (
 )
 
 func Create(args []string) {
-	if len(args) != 3 || args[0] != "--name" {
-		fmt.Println("Usage: lxr create --name <container_name> <image_name>")
+	if len(args) != 4 || args[0] != "--name" || args[2] != "--image" {
+		fmt.Println("Usage: lxr create --name <container_name> --image <image_name>")
 		return
 	}
 
 	var con models.NewContainer
 
 	con.ContainerName = args[1]
-	con.Image = args[2]
+	con.Image = args[3]
 
 	jsonData, err := json.Marshal(con)
 	if err != nil {
@@ -40,4 +40,5 @@ func Create(args []string) {
 	}
 
 	fmt.Printf("Container Created: Name = %v , ID = %v", response.ContainerName, response.ContainerId)
+	fmt.Println("")
 }
