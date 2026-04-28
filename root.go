@@ -1,7 +1,7 @@
 package lxrcli
 
 import (
-	"log"
+	"fmt"
 	"lxr-cli/commands"
 	"os"
 )
@@ -9,7 +9,7 @@ import (
 func Execute() {
 
 	if len(os.Args) < 2 {
-		log.Fatal("Usage: lxr <command>")
+		fmt.Println("Usage: lxr <command>")
 	}
 
 	switch os.Args[1] {
@@ -17,7 +17,9 @@ func Execute() {
 		//do nothing
 	case "ping":
 		commands.Ping()
+	case "create":
+		commands.Create(os.Args[2:])
 	default:
-		log.Fatal("Unknown command")
+		fmt.Println("Unknown command")
 	}
 }

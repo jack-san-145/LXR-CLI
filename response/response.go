@@ -3,7 +3,6 @@ package response
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"lxr-cli/models"
 	"net/http"
 )
@@ -17,7 +16,7 @@ func GetResponse(res *http.Response) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return fmt.Sprintf("Response from LXR daemon: %v", content), nil
+	return content, nil
 
 }
 
