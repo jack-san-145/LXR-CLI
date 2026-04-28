@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"log"
+	"fmt"
 	"lxr-cli/client"
 	"lxr-cli/response"
 )
@@ -10,12 +10,13 @@ func Ping() {
 	cli := client.CreateClient()
 	res, err := cli.Get("http://lxr/ping")
 	if err != nil {
-		log.Fatal("Request Error: ", err)
+		fmt.Println("Request Error: ", err)
+		return
 	}
 
 	content, err := response.GetResponse(res)
 	if err != nil {
-		log.Fatal("Error :", err)
+		fmt.Println("Error :", err)
 	}
-	log.Println(content)
+	fmt.Print(content)
 }
