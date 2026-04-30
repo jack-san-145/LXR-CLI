@@ -19,6 +19,8 @@ func Execute() {
 		commands.Ping()
 	case "create":
 		commands.Create(os.Args[2:])
+	case "exec":
+		commands.Exec(os.Args[2])
 	default:
 		fmt.Println("Unknown command")
 	}
