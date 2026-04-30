@@ -10,3 +10,7 @@ type CreationResponse struct {
 	ContainerName string `json:"container_name"`
 	ContainerId   string `json:"container_id"`
 }
+
+type ContainerRunResponse struct {
+	Active bool `json:"active"`
+}
