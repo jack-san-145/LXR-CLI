@@ -20,11 +20,25 @@ func GetResponse(res *http.Response) (string, error) {
 
 }
 
-func GetJsonResponse(res *http.Response) (*models.CreationResponse, error) {
+func GetContainerCreationResponse(res *http.Response) (*models.CreationResponse, error) {
 
 	defer res.Body.Close()
 
 	var response models.CreationResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+
+}
+func GetContainerRunResponse(res *http.Response) (*models.ContainerRunResponse, error) {
+
+	defer res.Body.Close()
+
+	var response models.ContainerRunResponse
 
 	err := json.NewDecoder(res.Body).Decode(&response)
 	if err != nil {
