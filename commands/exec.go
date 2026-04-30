@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"golang.org/x/term"
 	"io"
 	"net"
 	"os"
@@ -21,6 +22,9 @@ func Exec(containerName string) {
 	)
 
 	conn.Write([]byte(req))
+
+	oldState, _ := term.MakeRaw(int(os.Stdin.Fd()))
+	defer term.Restore(int(os.Stdin.Fd()), oldState)
 
 	go io.Copy(conn, os.Stdin) // user input → daemon
 	io.Copy(os.Stdout, conn)   // daemon → user output
