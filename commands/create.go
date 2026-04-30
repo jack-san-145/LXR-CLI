@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log"
 	"lxr-cli/client"
 	"lxr-cli/models"
 	"lxr-cli/response"
@@ -30,10 +29,10 @@ func Create(args []string) {
 	cli := client.CreateClient()
 	res, err := cli.Post("http://lxr/create", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
-		log.Fatal("Request Error (create): ", err)
+		fmt.Println("Request Error (create): ", err)
 	}
 
-	response, err := response.GetJsonResponse(res)
+	response, err := response.GetContainerCreationResponse(res)
 	if err != nil || response.IsCreated == false {
 		fmt.Println("Container creation Failured")
 		return
