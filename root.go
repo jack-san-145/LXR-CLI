@@ -14,7 +14,7 @@ func Execute() {
 
 	switch os.Args[1] {
 	case "run":
-		//do nothing
+		commands.Run(os.Args[2])
 	case "ping":
 		commands.Ping()
 	case "create":
