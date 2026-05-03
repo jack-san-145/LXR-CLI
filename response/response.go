@@ -48,3 +48,16 @@ func GetContainerRunResponse(res *http.Response) (*models.ContainerRunResponse, 
 	return &response, nil
 
 }
+
+func GetImagePullResponse(res *http.Response)(*models.ImagePullResponse, error) {
+	defer res.Body.Close()
+
+	var response models.ImagePullResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return nil, err
+	}
+
+	return &response, nil
+}
