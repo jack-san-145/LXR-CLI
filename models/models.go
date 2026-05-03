@@ -14,3 +14,7 @@ type CreationResponse struct {
 type ContainerRunResponse struct {
 	Active bool `json:"active"`
 }
+
+type ImagePullResponse struct {
+	Status string `json:"status"`
+}
