@@ -23,6 +23,7 @@ func Exec(containerName string) {
 
 	conn.Write([]byte(req))
 
+	//to make the terminal to stream raw data in real-time
 	oldState, _ := term.MakeRaw(int(os.Stdin.Fd()))
 	defer term.Restore(int(os.Stdin.Fd()), oldState)
 
