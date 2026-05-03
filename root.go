@@ -21,6 +21,8 @@ func Execute() {
 		commands.Create(os.Args[2:])
 	case "exec":
 		commands.Exec(os.Args[2])
+	case "pull":
+		commands.Pull(os.Args[2])
 	default:
 		fmt.Println("Unknown command")
 	}

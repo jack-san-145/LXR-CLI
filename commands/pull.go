@@ -18,7 +18,7 @@ func Pull(image string) {
 		return
 	}
 
-	res, err := cli.Post("/pull_image", "application/json", bytes.NewBuffer(jsonData))
+	res, err := cli.Post("http://lxr/pull_image", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		fmt.Println("Error in Pull request: ", err)
 		return
