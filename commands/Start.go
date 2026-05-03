@@ -7,7 +7,7 @@ import (
 	"lxr-cli/response"
 )
 
-func Run(container_name string) {
+func Start(container_name string) {
 
 	cli := client.CreateClient()
 
@@ -19,5 +19,5 @@ func Run(container_name string) {
 		return
 	}
 
-	fmt.Println(container_name, "Running...")
+	fmt.Println(container_name, " Started")
 }

@@ -7,11 +7,13 @@ import (
 	"lxr-cli/client"
 	"lxr-cli/response"
 	"strings"
+	"time"
 )
 
 func Pull(image string) {
 	image = strings.Split(image, ":")[0]
 	cli := client.CreateClient()
+	cli.Timeout = 10 * time.Minute
 	jsonData, err := json.Marshal(map[string]string{"img_name": image})
 	if err != nil {
 		fmt.Println("Error Marshaling: ", err)
@@ -29,6 +31,6 @@ func Pull(image string) {
 		fmt.Println("Error in unmarshal image response:  ", err)
 		return
 	}
-	fmt.Println(response)
+	fmt.Println(response.Status)
 
 }
