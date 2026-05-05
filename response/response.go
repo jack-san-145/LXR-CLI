@@ -49,7 +49,7 @@ func GetContainerRunResponse(res *http.Response) (*models.ContainerRunResponse, 
 
 }
 
-func GetImagePullResponse(res *http.Response)(*models.ImagePullResponse, error) {
+func GetImagePullResponse(res *http.Response) (*models.ImagePullResponse, error) {
 	defer res.Body.Close()
 
 	var response models.ImagePullResponse
@@ -60,4 +60,28 @@ func GetImagePullResponse(res *http.Response)(*models.ImagePullResponse, error) 
 	}
 
 	return &response, nil
+}
+
+func GetStartResponse(res *http.Response) (string, error) {
+	defer res.Body.Close()
+
+	var response models.StartResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return "", err
+	}
+
+	if response.AlreadyActive {
+		return "Already Running", nil
+	}
+	if response.Activated {
+		return "Started", nil
+	}
+
+	if response.Failed {
+		return "Failed to Start", nil
+	}
+
+	return "Not Found", nil
 }
