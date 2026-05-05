@@ -10,15 +10,15 @@ import (
 )
 
 func Create(args []string) {
-	if len(args) != 4 || args[0] != "--name" || args[2] != "--image" {
-		fmt.Println("Usage: lxr create --name <container_name> --image <image_name>")
+	if len(args) != 3 || args[0] != "--name" {
+		fmt.Println("Usage: lxr create --name <container_name> <image_name>")
 		return
 	}
 
 	var con models.NewContainer
 
 	con.ContainerName = args[1]
-	con.Image = args[3]
+	con.Image = args[2]
 
 	jsonData, err := json.Marshal(con)
 	if err != nil {
@@ -33,8 +33,12 @@ func Create(args []string) {
 	}
 
 	response, err := response.GetContainerCreationResponse(res)
+	if response.AlreadyExists {
+		fmt.Println("Container Already exists")
+		return
+	}
 	if err != nil || response.IsCreated == false {
-		fmt.Println("Container creation Failured")
+		fmt.Println("Failed to create container")
 		return
 	}
 

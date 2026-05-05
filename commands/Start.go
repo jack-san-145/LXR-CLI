@@ -11,7 +11,7 @@ func Start(container_name string) {
 
 	cli := client.CreateClient()
 
-	res, err := cli.Get("http://lxr/run?container_name=" + container_name)
+	res, err := cli.Get("http://lxr/start?container_name=" + container_name)
 	content, err := response.GetContainerRunResponse(res)
 	if err != nil || !content.Active {
 		//fmt.Println("Container Run Error:", err)
@@ -19,5 +19,5 @@ func Start(container_name string) {
 		return
 	}
 
-	fmt.Println(container_name, " Started")
+	fmt.Println(container_name, ": Started")
 }
