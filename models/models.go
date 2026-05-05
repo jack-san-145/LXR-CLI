@@ -19,3 +19,10 @@ type ContainerRunResponse struct {
 type ImagePullResponse struct {
 	Status string `json:"status"`
 }
+
+type StartResponse struct {
+	AlreadyActive bool `json:"already_active"`
+	Activated     bool `json:"activated"`
+	Failed        bool `json:"failed"`
+	DoesNotExists bool `json:"exists"`
+}
