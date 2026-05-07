@@ -85,3 +85,20 @@ func GetStartResponse(res *http.Response) (string, error) {
 
 	return "Not Found", nil
 }
+
+func GetStopResponse(res *http.Response) (string, error) {
+
+	defer res.Body.Close()
+
+	var response models.StopResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return "", err
+	}
+
+	if !response.Exists {
+		return "Container doesn't Exists", nil
+	}
+	return "Container Stopped", nil
+}
