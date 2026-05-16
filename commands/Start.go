@@ -20,4 +20,5 @@ func Start(container_name string) {
 	}
 
 	fmt.Println(container_name + " " + response)
+
 }
