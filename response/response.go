@@ -114,6 +114,10 @@ func GetKillResponse(res *http.Response) (string, error) {
 		return "", err
 	}
 
+	if !response.Exists {
+		return "Container doesn't Exists", nil
+	}
+
 	if response.Killed {
 		return "Container Killed Successfully", nil
 	}
