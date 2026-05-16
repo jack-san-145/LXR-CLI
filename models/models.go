@@ -33,5 +33,6 @@ type StopResponse struct {
 }
 
 type KillResponse struct {
+	Exists bool `json:"container_exists"`
 	Killed bool `json:"is_killed"`
 }
