@@ -25,7 +25,9 @@ func Execute() {
 		commands.Exec(os.Args[2])
 	case "pull":
 		commands.Pull(os.Args[2])
+	case "kill":
+		commands.Kill(os.Args[2])
 	default:
-		fmt.Println("Unknown command")
+		fmt.Println("Lxr: <Unknown command>")
 	}
 }
