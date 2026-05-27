@@ -1,11 +1,11 @@
 package commands
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"lxr-cli/client"
-	"lxr-cli/response"
 	"strings"
 	"time"
 )
@@ -23,14 +23,17 @@ func Pull(image string) {
 	res, err := cli.Post("http://lxr/pull_image", "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		fmt.Println("Error in Pull request: ", err)
-		return
 	}
 
-	response, err := response.GetImagePullResponse(res)
-	if err != nil {
-		fmt.Println("Error in unmarshal image response:  ", err)
-		return
+	reader := bufio.NewReader(res.Body)
+	defer res.Body.Close()
+	for {
+		data, err := reader.ReadString('\n')
+		if err != nil {
+			return
+		}
+		fmt.Print(data)
+
 	}
-	fmt.Println(response.Status)
 
 }
