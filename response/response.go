@@ -123,3 +123,15 @@ func GetKillResponse(res *http.Response) (string, error) {
 	}
 	return "Kill Failured", nil
 }
+
+func GetPsResponse(res *http.Response) ([]models.PsContainer, error) {
+
+	var response models.PsResponse
+
+	err := json.NewDecoder(res.Body).Decode(&response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response.Containers, nil
+}
