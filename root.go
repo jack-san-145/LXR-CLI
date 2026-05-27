@@ -27,6 +27,13 @@ func Execute() {
 		commands.Pull(os.Args[2])
 	case "kill":
 		commands.Kill(os.Args[2])
+	case "ps":
+
+		if len(os.Args) > 2 && os.Args[2] == "-a" {
+			commands.PsAll()
+		} else {
+			commands.Ps()
+		}
 	default:
 		fmt.Println("Lxr: <Unknown command>")
 	}
