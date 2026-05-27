@@ -10,7 +10,6 @@ import (
 func Start(container_name string) {
 
 	cli := client.CreateClient()
-
 	res, _ := cli.Get("http://lxr/start?container_name=" + container_name)
 	response, err := response.GetStartResponse(res)
 
