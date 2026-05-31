@@ -1,12 +1,14 @@
 package commands
 
 import (
-	"bufio"
+	// "bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"lxr-cli/client"
 	"lxr-cli/models"
+	"os"
 )
 
 func Create(args []string) {
@@ -32,15 +34,11 @@ func Create(args []string) {
 		fmt.Println("Request Error (create): ", err)
 	}
 
-	reader := bufio.NewReader(res.Body)
 	defer res.Body.Close()
-	for {
-		data, err := reader.ReadString('\n')
-		if err != nil {
-			return
-		}
-		fmt.Print(data)
 
+	_, err = io.Copy(os.Stdout, res.Body)
+	if err != nil {
+		fmt.Println("stream error:", err)
 	}
 
 }
