@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"lxr-cli/client"
 	"lxr-cli/response"
+	"strconv"
+	"strings"
 )
 
 func Ps() {
@@ -23,32 +25,51 @@ func Ps() {
 	}
 
 	if len(containers) == 0 {
-		fmt.Println("No running containers")
+		fmt.Printf(
+			"%-15s %-15s %-15s %-10s %-10s %-15s %-20s\n",
+			"CONTAINER ID",
+			"NAME",
+			"IMAGE",
+			"PID",
+			"STATUS",
+			"IP",
+			"PORTS",
+		)
+
 		return
 	}
 
 	fmt.Printf(
-		"%-15s %-15s %-15s %-10s %-10s %-15s %-10s\n",
+		"%-15s %-15s %-15s %-10s %-10s %-15s %-20s\n",
 		"CONTAINER ID",
 		"NAME",
 		"IMAGE",
 		"PID",
 		"STATUS",
 		"IP",
-		"PORT",
+		"PORTS",
 	)
 
 	for _, con := range containers {
 
+		var ports []string
+
+		for _, p := range con.Ports {
+			ports = append(ports, strconv.Itoa(p))
+		}
+
+		portString := strings.Join(ports, ",")
+
 		fmt.Printf(
-			"%-15s %-15s %-15s %-10d %-10s %-15s %-10d\n",
+			"%-15s %-15s %-15s %-10d %-10s %-15s %-20s\n",
 			con.ContainerID,
 			con.ContainerName,
 			con.Image,
 			con.PID,
 			con.Status,
 			con.IPAddress,
-			con.Port,
+			portString,
 		)
+
 	}
 }
